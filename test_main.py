@@ -41,36 +41,42 @@ class TestBooksCollector:
         assert collection.get_book_genre('Недоросль') == 'Комедии'
 
     '''Позитивная проверка: удаётся получить список книг с определённым жанром'''
-    def test_books_with_specific_genre_find_books_by_genre(self,collection, test_library):
-        collection.books_genre = test_library
+    def test_books_with_specific_genre_find_books_by_genre(self,collection):
+        collection.books_genre = {
+            'Джуманджи': 'Фантастика',
+            'Властелин Колец': 'Фантастика', 
+            'Молчание ягнят': 'Ужасы'
+        }
         assert collection.get_books_with_specific_genre('Фантастика') == ['Джуманджи',  'Властелин Колец']
 
     '''Позитивная проверка: удаётся получить словарь books_genre'''
-    def test_get_books_genre_success(self, collection, test_library):
-        collection.books_genre = test_library
+    def test_get_books_genre_success(self, collection):
+        collection.add_new_book('Пуаро')
+        collection.set_book_genre('Пуаро', 'Детективы')
+        collection.add_new_book('Сборник анекдотов')
+        collection.set_book_genre('Сборник анекдотов', 'Комедии')
         assert collection.get_books_genre() == {
-            'Джуманджи': 'Фантастика',
-            'Властелин Колец': 'Фантастика', 
-            'Молчание ягнят': 'Ужасы',
             'Пуаро': 'Детективы',
             'Сборник анекдотов': 'Комедии'
         }
     
     '''Позитивная проверка: удаётся получить книги, подходящие детям'''
-    def test_get_books_for_children_success(self,collection, test_library):
-        collection.books_genre = test_library
-        assert collection.get_books_for_children() == ['Джуманджи', 'Властелин Колец', 'Сборник анекдотов']
+    def test_get_books_for_children_success(self,collection):
+        collection.books_genre = {
+            'Джуманджи': 'Фантастика',
+            'Пуаро': 'Детективы',
+            'Сборник анекдотов': 'Комедии'
+        }
+        assert collection.get_books_for_children() == ['Джуманджи', 'Сборник анекдотов']
 
     '''Позитивная проверка: книги добавляются в избранное'''
-    def test_add_book_in_favorites_success(self, collection, test_library):
-        collection.books_genre = test_library
+    def test_add_book_in_favorites_success(self, collection):
+        collection.add_new_book('Пуаро')
         collection.add_book_in_favorites('Пуаро')
-        collection.add_book_in_favorites('Джуманджи')
-        assert collection.get_list_of_favorites_books() == ['Пуаро', 'Джуманджи']
+        assert collection.get_list_of_favorites_books() == ['Пуаро']
 
     '''Негативная проверка: добавление книги в избранное НЕ из словаря'''
-    def test_add_book_in_favorites_not_in_library(self, collection, test_library):
-        collection.books_genre = test_library
+    def test_add_book_in_favorites_not_in_library(self, collection):
         collection.add_book_in_favorites('Несуществующая книга')
         assert  collection.get_list_of_favorites_books() == []
 
