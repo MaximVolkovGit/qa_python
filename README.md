@@ -44,7 +44,3 @@ pytest -v test_main.py
 pytest --cov
 
 ## Результат выполнения тестов: 100%
-
-conftest.py        9      0   100%
-main.py           38      0   100%
-test_main.py      65      0   100%
