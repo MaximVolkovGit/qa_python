@@ -16,7 +16,7 @@ class TestBooksCollector:
     def test_add_new_book_add_border_book_name(self, collection, valid_books):
         collection.add_new_book(valid_books)
     
-    ''' Негативная проверка: книги с наименованием 0 или длиннее 40 символов - не добавляются'''
+    '''Негативная проверка: книги с наименованием 0 или длиннее 40 символов - не добавляются'''
     @pytest.mark.parametrize('invalid_books', 
         ['',
         'A'*50
