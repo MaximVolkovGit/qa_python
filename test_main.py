@@ -96,6 +96,5 @@ class TestBooksCollector:
 
     '''Позитивная проверка: получение списка Избранных книг'''
     def test_get_list_of_favorites_books_success(self, collection):
-        collection.add_new_book('Каштанка')
-        collection.add_book_in_favorites('Каштанка')
-        assert collection.get_list_of_favorites_books() == ['Каштанка']
+        collection.favorites = ['Каштанка', 'Мастер и Маргарита']    # создали список избранного напрямую
+        assert collection.get_list_of_favorites_books() == ['Каштанка', 'Мастер и Маргарита']
