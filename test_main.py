@@ -15,8 +15,9 @@ class TestBooksCollector:
         ])
     def test_add_new_book_add_border_book_name(self, collection, valid_books):
         collection.add_new_book(valid_books)
-        assert valid_books in collection.get_books_genre()
-        assert collection.get_books_genre()[valid_books] == ''
+        assert valid_books in collection.get_books_genre()  
+        assert collection.get_books_genre()[valid_books] == ''  # С наставником обсудили, что этот ассерт лучше оставить. 
+                                                                # Пусть правильность жанра (пустой) тоже провертися.
     
     '''Негативная проверка: книги с наименованием 0 или длиннее 40 символов - не добавляются'''
     @pytest.mark.parametrize('invalid_books', 
