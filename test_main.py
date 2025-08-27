@@ -37,7 +37,7 @@ class TestBooksCollector:
     '''Позитивная проверка: получение жанра по названию книги'''
     def test_get_book_genre_correct_genre_by_book_title(self, collection):
         collection.add_new_book('Недоросль')
-        collection.set_book_genre('Недоросль', 'Комедии')
+        collection.books_genre['Недоросль'] = 'Комедии'     # присвоили жанр по-другому, через доступ к словарю
         assert collection.get_book_genre('Недоросль') == 'Комедии'
 
     '''Позитивная проверка: удаётся получить список книг с определённым жанром'''
